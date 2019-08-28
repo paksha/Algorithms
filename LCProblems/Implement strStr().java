@@ -1,15 +1,17 @@
-/*
-Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
-*/
-
 class Solution {
     public int strStr(String haystack, String needle) {
-        if (needle.isEmpty()) {
+        int l1 = haystack.length(), l2 = needle.length();
+        if (l2 == 0) {
             return 0;
-        } else if (!haystack.contains(needle)) {
+        } else if (l1 < l2) {
             return -1;
-        } else {
-            return haystack.indexOf(needle);
         }
+        int threshold = l1 - l2;
+        for (int i = 0; i <= threshold; ++i) {
+            if (haystack.substring(i, i+l2).equals(needle)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
