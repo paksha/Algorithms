@@ -1,23 +1,3 @@
-/*
-Given a binary tree, return all root-to-leaf paths.
-
-Note: A leaf is a node with no children.
-
-Example:
-
-Input:
-
-   1
- /   \
-2     3
- \
-  5
-
-Output: ["1->2->5", "1->3"]
-
-Explanation: All root-to-leaf paths are: 1->2->5, 1->3
-*/
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -33,15 +13,16 @@ Explanation: All root-to-leaf paths are: 1->2->5, 1->3
 import java.util.*;
 class Solution {
     private void path(TreeNode root, String pathsofar, List<String> ls) {
+        StringBuilder str = new StringBuilder(pathsofar);
         if (root == null) return;
-        pathsofar += Integer.toString(root.val);
+        str.append(Integer.toString(root.val));
         if (root.left == null && root.right == null) {
-            ls.add(pathsofar);
+            ls.add(str.toString());
             return;
         }
-        pathsofar += "->";
-        path(root.left, pathsofar, ls);
-        path(root.right, pathsofar, ls);
+        str.append("->");
+        path(root.left, str.toString(), ls);
+        path(root.right, str.toString(), ls);
     }
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> paths = new ArrayList<>();
